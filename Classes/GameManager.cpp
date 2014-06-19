@@ -16,4 +16,4 @@ GameManager* GameManager::getInstance()
 bool GameManager::init()
 {
 	return true;
-}
+}   

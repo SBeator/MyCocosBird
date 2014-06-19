@@ -1,9 +1,7 @@
 #pragma once
 #include "cocos2d.h"
 
-USING_NS_CC;
-
-class Background : public Layer
+class Background : public cocos2d::Layer
 {
 public:
 	virtual bool init();
@@ -14,6 +12,6 @@ private:
 
 	static std::string picturePath;
 
-	Sprite* _backgroundPicture;
+    cocos2d::Sprite* _backgroundPicture;
 };
 
