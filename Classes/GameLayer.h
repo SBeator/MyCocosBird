@@ -9,7 +9,11 @@ public:
 
 	CREATE_FUNC(GameLayer);
 
+    virtual bool onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event);
+
 private:
     Bird* _bird;
+
+
 };
 

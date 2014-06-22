@@ -14,6 +14,21 @@ bool GameLayer::init()
 
     this->addChild(_bird, 1);
 
+    // Register Touch Event
+    auto listener = EventListenerTouchOneByOne::create();
+    listener->setSwallowTouches(true);
+
+    listener->onTouchBegan = CC_CALLBACK_2(GameLayer::onTouchBegan, this);
+
+    _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+
+    return true;
+}
+
+bool GameLayer::onTouchBegan(Touch* touch, Event* event)
+{
+    _bird->onTouchBegan(touch, event);
+
     return true;
 }
 

@@ -1,12 +1,17 @@
 #pragma once
+#include "cocos2d.h"
+
 class GameManager
 {
 public:
 	static GameManager* getInstance();
-
-	bool init();
+    
+    void startGame();
 
 private:
-	static GameManager* _gameManager;
+    bool init();
+
+    static GameManager* _gameManager;
+    cocos2d::Director* _director;
 };
 
