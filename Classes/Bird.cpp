@@ -5,7 +5,7 @@ using namespace std;
 
 #define FLY_FRAMES_NUMBER 3
 
-string Bird::_flyFramePaths[FLY_FRAMES_NUMBER] = {
+string Bird::s_flyFramePaths[FLY_FRAMES_NUMBER] = {
     "1.png",
     "2.png",
     "3.png"
@@ -16,34 +16,34 @@ int frameHeight = 100;
 
 float scale = 0.3;
 
-int Bird::_width = frameWidth * scale;
-int Bird::_height = frameHeight * scale;
+float Bird::s_width = frameWidth * scale;
+float Bird::s_height = frameHeight * scale;
 
-float Bird::_gravity = -10;
-float Bird::_rotateFactor = -10;
-float Bird::_riseVelocity = 5;
+float Bird::s_gravity = -10;
+float Bird::s_rotateFactor = -10;
+float Bird::s_riseVelocity = 5;
 
 bool Bird::init()
 {
     _velocityX = 0;
     _velocityY = 0;
     _deltaVelocityX = 0;
-    _deltaVelocityY = _gravity;
+    _deltaVelocityY = s_gravity;
 
 
     Rect frameRect(0, 0, frameWidth, frameHeight);
-    Rect birdRect(0, 0, _width, _height);
+    Rect birdRect(0, 0, s_width, s_height);
 
     Size originSize((float)frameWidth / scale, (float)frameHeight / scale);
 
-    this->initWithFile(_flyFramePaths[0]);
+    this->initWithFile(s_flyFramePaths[0]);
     this->setScale(scale);
    
     Vector<SpriteFrame*> frames;
 
     for (size_t i = 0; i < FLY_FRAMES_NUMBER; i++)
     {
-        auto frame = SpriteFrame::create(_flyFramePaths[i], frameRect, false, Point::ZERO, originSize);
+        auto frame = SpriteFrame::create(s_flyFramePaths[i], frameRect, false, Point::ZERO, originSize);
         frames.pushBack(frame);
     }
 
@@ -67,7 +67,7 @@ void Bird::update(float delta)
 
     point += Point(_velocityX, _velocityY);
 
-    float rotate = _velocityY * _rotateFactor;
+    float rotate = _velocityY * s_rotateFactor;
 
     rotate = rotate > 90 ?
                 90 : 
@@ -81,7 +81,7 @@ void Bird::update(float delta)
 
 bool Bird::onTouchBegan(Touch* touch, Event* event)
 {
-    _velocityY = _riseVelocity;
+    _velocityY = s_riseVelocity;
 
     return true;
 }

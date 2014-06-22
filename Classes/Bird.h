@@ -20,12 +20,12 @@ private:
 
     cocos2d::Action* _flying;
 
-    static float _gravity;
-    static float _rotateFactor;
-    static float _riseVelocity;
-    static int _width;
-    static int _height;
+    static float s_gravity;
+    static float s_rotateFactor;
+    static float s_riseVelocity;
+    static float s_width;
+    static float s_height;
 
-    static std::string _flyFramePaths[];
+    static std::string s_flyFramePaths[];
 };
 

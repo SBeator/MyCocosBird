@@ -12,7 +12,12 @@ bool GameLayer::init()
     _bird = Bird::create();
     _bird->setPosition(Point(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y));
 
-    this->addChild(_bird, 1);
+    this->addChild(_bird);
+
+    auto blocker = Blocker::create();
+    blocker->setPosition(Point(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y));
+
+    this->addChild(blocker);
 
     // Register Touch Event
     auto listener = EventListenerTouchOneByOne::create();

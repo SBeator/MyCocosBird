@@ -1,6 +1,7 @@
 #pragma once
 #include "cocos2d.h"
 #include "Bird.h"
+#include "Blocker.h"
 
 class GameLayer : public cocos2d::Layer
 {
