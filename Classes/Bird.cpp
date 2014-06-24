@@ -38,6 +38,7 @@ bool Bird::init()
 
     this->initWithFile(s_flyFramePaths[0]);
     this->setScale(scale);
+    this->setAnchorPoint(Point(0.4, 0.5));
    
     Vector<SpriteFrame*> frames;
 
