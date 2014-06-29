@@ -15,6 +15,7 @@ int frameWidth = 135;
 int frameHeight = 100;
 
 float scale = 0.3;
+float frameDelay = 0.2f;
 
 float Bird::s_width = frameWidth * scale;
 float Bird::s_height = frameHeight * scale;
@@ -48,7 +49,7 @@ bool Bird::init()
         frames.pushBack(frame);
     }
 
-    _flying = RepeatForever::create(Animate::create(Animation::createWithSpriteFrames(frames, 0.3f)));
+    _flying = RepeatForever::create(Animate::create(Animation::createWithSpriteFrames(frames, frameDelay)));
 
 
     this->runAction(_flying);
