@@ -38,6 +38,11 @@ bool GameManager::init()
 
     // TODO: no magic number
     _gamePlaceSize = Size(200, 200); 
+
+    Size visibleSize = Director::getInstance()->getVisibleSize();
+    Point origin = Director::getInstance()->getVisibleOrigin();
+
+    _gameCenter = Point(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y);
      
     return true;
 }  
@@ -45,4 +50,9 @@ bool GameManager::init()
 Size GameManager::getGamePlaceSize() const
 {
     return _gamePlaceSize;
+}
+
+Point GameManager::getGameCenter() const
+{
+    return _gameCenter;
 }

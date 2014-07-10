@@ -8,6 +8,8 @@ public:
     virtual bool init();
     CREATE_FUNC(Blocker);
 
+    CC_PROPERTY_READONLY(float, _width, Width)
+
 private:
 
     virtual void update(float delta);

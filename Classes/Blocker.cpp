@@ -6,7 +6,7 @@ using namespace std;
 
 string Blocker::s_imagePath = "BlockerDown.png";
 
-float Blocker::s_deltaHeight = 100;
+float Blocker::s_deltaHeight = 150;
 float Blocker::s_velocity =-3;
 
 bool Blocker::init()
@@ -15,6 +15,8 @@ bool Blocker::init()
 
     _downBlocker = Sprite::create(s_imagePath);
     _upBlocker = Sprite::create(s_imagePath);
+
+    _width = _downBlocker->getContentSize().width;
 
     _downBlocker->setAnchorPoint(Point(0.5, 1));
     _upBlocker->setAnchorPoint(Point(0.5, 1));
@@ -41,3 +43,7 @@ void Blocker::update(float delta)
     this->setPosition(position);
 }
 
+float Blocker::getWidth() const
+{
+    return _width;
+}

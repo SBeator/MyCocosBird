@@ -11,6 +11,7 @@ public:
     float getRandomNumber(float maxNumber = 1, float minNumber = 0);
 
     CC_PROPERTY_READONLY(cocos2d::Size, _gamePlaceSize, GamePlaceSize)
+    CC_PROPERTY_READONLY(cocos2d::Point, _gameCenter, GameCenter)
 private:
     bool init();
 
