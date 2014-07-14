@@ -14,6 +14,8 @@ public:
 
 private:
     virtual void update(float delta);
+    void removeBlockerIfOut();
+
 
     cocos2d::Vector<Blocker*>* _Blockers;
     float _blockerCreateTime;

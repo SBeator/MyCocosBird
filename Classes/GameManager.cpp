@@ -37,7 +37,7 @@ bool GameManager::init()
     srand(time(0));
 
     // TODO: no magic number
-    _gamePlaceSize = Size(200, 200); 
+    _gamePlaceSize = Size(400, 400); 
 
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Point origin = Director::getInstance()->getVisibleOrigin();
