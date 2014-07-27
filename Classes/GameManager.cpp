@@ -25,6 +25,12 @@ void GameManager::startGame()
     _director->runWithScene(scene);
 }
 
+void GameManager::stopGame()
+{
+    _director->stopAnimation();
+
+}
+
 float GameManager::getRandomNumber(float maxNumber, float minNumber)
 {
     return ((float)rand()) * (maxNumber - minNumber) / (float)RAND_MAX + minNumber;

@@ -2,6 +2,7 @@
 #include "cocos2d.h"
 #include "Blocker.h"
 #include "GameManager.h"
+#include "Bird.h"
 
 class Blockers : public cocos2d::Layer
 {
@@ -12,12 +13,14 @@ public:
     void addBlocker(Blocker* blocker);
     void addRandomBlocker();
 
+    bool hitBird(Bird* bird);
+
 private:
     virtual void update(float delta);
     void removeBlockerIfOut();
 
 
-    cocos2d::Vector<Blocker*>* _Blockers;
+    cocos2d::Vector<Blocker*> _blockers;
     float _blockerCreateTime;
 
     GameManager* _gameManager;

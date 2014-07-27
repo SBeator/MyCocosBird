@@ -6,14 +6,27 @@ bool Blockers::init()
 {
     _gameManager = GameManager::getInstance();
 
-    _Blockers = new Vector<Blocker*>();
-
     this->addRandomBlocker();
 
     _blockerCreateTime = 2;
     this->scheduleUpdate();
 
     return true;
+}
+
+bool Blockers::hitBird(Bird* bird)
+{
+    bool hit = false;
+    for (auto blocker : _blockers)
+    {
+        if (blocker->hitBird(bird))
+        {
+            hit = true;
+            break;
+        }
+    }
+
+    return hit;
 }
 
 void Blockers::addRandomBlocker()
@@ -31,7 +44,7 @@ void Blockers::addRandomBlocker()
 
 void Blockers::addBlocker(Blocker* blocker)
 {
-    _Blockers->pushBack(blocker);
+    _blockers.pushBack(blocker);
     this->addChild(blocker);
 }
 
@@ -50,7 +63,7 @@ void Blockers::update(float delta)
 
 void Blockers::removeBlockerIfOut()
 {
-    auto blocker = _Blockers->at(0);
+    auto blocker = _blockers.at(0);
 
     if (blocker != nullptr)
     {
@@ -62,11 +75,12 @@ void Blockers::removeBlockerIfOut()
         if (point.x - position.x + width > size.width / 2)
         {
             this->removeChild(blocker);
-            _Blockers->erase(0);
+            _blockers.erase(0);
         }
     }
     else
     {
-        _Blockers->erase(0);
+        _blockers.erase(0);
     }
 }
+

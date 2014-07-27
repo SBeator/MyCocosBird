@@ -1,5 +1,6 @@
 #pragma once
 #include "cocos2d.h"
+#include "Bird.h"
 
 class Blocker : public cocos2d::Layer
 {
@@ -9,6 +10,8 @@ public:
     CREATE_FUNC(Blocker);
 
     CC_PROPERTY_READONLY(float, _width, Width)
+
+    bool hitBird(Bird* bird);
 
 private:
 

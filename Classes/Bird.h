@@ -9,6 +9,7 @@ public:
     CREATE_FUNC(Bird);
 
     virtual bool onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event);
+    virtual cocos2d::Rect getBoundingBox() const;
 
 private:
 

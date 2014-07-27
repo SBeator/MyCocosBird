@@ -47,3 +47,33 @@ float Blocker::getWidth() const
 {
     return _width;
 }
+
+bool Blocker::hitBird(Bird* bird)
+{
+    Rect birdRect = bird->getBoundingBox();
+
+    auto pos = this->getPosition();
+
+    Rect rectDown(_downBlocker->getBoundingBox());
+    Rect rectUp(_upBlocker->getBoundingBox());
+
+    rectDown.origin += pos;
+    rectUp.origin += pos;
+
+    bool hit;
+
+    if (birdRect.intersectsRect(rectDown))
+    {
+        hit = true;
+    } 
+    else if (birdRect.intersectsRect(rectUp))
+    {
+        hit = true;
+    }
+    else
+    {
+        hit = false;
+    }
+  
+    return hit;
+}

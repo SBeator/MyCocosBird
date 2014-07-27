@@ -56,7 +56,6 @@ bool Bird::init()
 
     this->scheduleUpdate();
 
-
     return true;
 }
 
@@ -88,3 +87,19 @@ bool Bird::onTouchBegan(Touch* touch, Event* event)
     return true;
 }
 
+Rect Bird::getBoundingBox() const
+{
+    Point offsetPoint(this->getAnchorPoint());
+    const float scaleX = this->getScaleX();
+    const float scaleY = this->getScaleY();
+
+    Rect rect(Sprite::getBoundingBox());
+
+    rect.origin.x += offsetPoint.x * rect.size.width * (1 - scaleX);
+    rect.origin.y += offsetPoint.y * rect.size.height * (1 - scaleY);
+
+    rect.size.width *= scaleX;
+    rect.size.height *= scaleY;
+
+    return rect;
+}

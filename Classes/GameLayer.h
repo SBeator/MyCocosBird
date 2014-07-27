@@ -13,6 +13,8 @@ public:
 
     virtual bool onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event);
 
+    bool checkIfBirdHitBlockerOrGround();
+
 private:
     GameManager* _gameManager;
     Bird* _bird;
