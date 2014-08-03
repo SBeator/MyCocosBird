@@ -7,11 +7,14 @@
 class GameLayer : public cocos2d::Layer
 {
 public:
-	virtual bool init();
+    virtual bool init();
 
-	CREATE_FUNC(GameLayer);
+    CREATE_FUNC(GameLayer);
+
 
     virtual bool onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event);
+
+    void stop();
 
     bool checkIfBirdHitBlockerOrGround();
 
@@ -19,5 +22,7 @@ private:
     GameManager* _gameManager;
     Bird* _bird;
     Blockers* _blockers;
+
+    bool _running;
 };
 

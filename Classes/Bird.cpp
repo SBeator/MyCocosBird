@@ -1,4 +1,5 @@
 #include "Bird.h"
+#include "GameManager.h"
 
 USING_NS_CC;
 using namespace std;
@@ -20,16 +21,21 @@ float frameDelay = 0.2f;
 float Bird::s_width = frameWidth * scale;
 float Bird::s_height = frameHeight * scale;
 
-float Bird::s_gravity = -10;
 float Bird::s_rotateFactor = -10;
 float Bird::s_riseVelocity = 5;
 
 bool Bird::init()
 {
+    if (!Sprite::init())
+    {
+        return false;
+    }
+
+    _gravity = -10;
     _velocityX = 0;
     _velocityY = 0;
     _deltaVelocityX = 0;
-    _deltaVelocityY = s_gravity;
+    _deltaVelocityY = _gravity;
 
 
     Rect frameRect(0, 0, frameWidth, frameHeight);
@@ -56,35 +62,56 @@ bool Bird::init()
 
     this->scheduleUpdate();
 
+    _pause = false;
+
     return true;
 }
 
 void Bird::update(float delta)
 {
-    Point point = this->getPosition();
+    if (!_pause)
+    {
+        Point point = this->getPosition();
 
-    _velocityX += _deltaVelocityX * delta;
-    _velocityY += _deltaVelocityY * delta;
+        _velocityX += _deltaVelocityX * delta;
+        _velocityY += _deltaVelocityY * delta;
 
-    point += Point(_velocityX, _velocityY);
+        point += Point(_velocityX, _velocityY);
 
-    float rotate = _velocityY * s_rotateFactor;
+        float rotate = _velocityY * s_rotateFactor;
 
-    rotate = rotate > 90 ?
-                90 : 
-                rotate < -90 ?
-                    -90 : 
-                    rotate;
+        rotate = rotate > 90 ?
+            90 :
+            rotate < -90 ?
+            -90 :
+            rotate;
 
-    this->setPosition(point);
-    this->setRotation(rotate);
+        this->setPosition(point);
+        this->setRotation(rotate);
+    }
 }
 
 bool Bird::onTouchBegan(Touch* touch, Event* event)
 {
-    _velocityY = s_riseVelocity;
-
+    this->rise();
     return true;
+}
+
+void Bird::setDefaultPosition()
+{
+    Point center = GameManager::getInstance()->getGameCenter();
+    center.x -= s_width;
+    this->setPosition(center);
+}
+
+void Bird::rise()
+{
+    _velocityY = s_riseVelocity;
+}
+
+void Bird::hitted()
+{
+    _deltaVelocityY *= 2;
 }
 
 Rect Bird::getBoundingBox() const
@@ -102,4 +129,32 @@ Rect Bird::getBoundingBox() const
     rect.size.height *= scaleY;
 
     return rect;
+}
+
+void Bird::setGravity(float gravity)
+{
+    _gravity = 0;
+    _deltaVelocityY = 0;
+}
+
+bool Bird::hitGround()
+{
+    auto position = this->getPosition();
+    auto size = GameManager::getInstance()->getGamePlaceSize();
+
+    bool result;
+    if (position.y <  - s_height)
+    {
+        result = true;
+    }
+    else if (position.y > size.height * 2)
+    {
+        result = true;
+    }
+    else
+    {
+        result = false;
+    }
+
+    return result;
 }

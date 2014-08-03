@@ -4,6 +4,11 @@ USING_NS_CC;
 
 bool Blockers::init()
 {
+    if (!Layer::init())
+    {
+        return false;
+    }
+
     _gameManager = GameManager::getInstance();
 
     this->addRandomBlocker();
@@ -11,7 +16,18 @@ bool Blockers::init()
     _blockerCreateTime = 2;
     this->scheduleUpdate();
 
+    _pause = false;
+
     return true;
+}
+
+void Blockers::stop()
+{
+    _pause = true;
+    for each (auto blocker in _blockers)
+    {
+        blocker->stop();
+    }
 }
 
 bool Blockers::hitBird(Bird* bird)
@@ -51,12 +67,19 @@ void Blockers::addBlocker(Blocker* blocker)
 float updateTime = 0;
 void Blockers::update(float delta)
 {
-    updateTime += delta;
-
-    if (updateTime > _blockerCreateTime)
+    if (!_pause)
     {
-        this->addRandomBlocker();
-        this->removeBlockerIfOut();
+        updateTime += delta;
+
+        if (updateTime > _blockerCreateTime)
+        {
+            this->addRandomBlocker();
+            this->removeBlockerIfOut();
+            updateTime = 0;
+        }
+    }
+    else
+    {
         updateTime = 0;
     }
 }

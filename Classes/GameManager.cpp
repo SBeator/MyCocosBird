@@ -2,6 +2,7 @@
 #include <cstdlib>
 #include <ctime>
 #include "GameRunning.h"
+#include "GameBeginning.h"
 
 USING_NS_CC;
 
@@ -18,17 +19,25 @@ GameManager* GameManager::getInstance()
     return _gameManager;
 }
 
-void GameManager::startGame()
+void GameManager::beginGame()
 {
-    auto scene = GameRunning::create();
+    _gameBeginning = GameBeginning::create();
 
-    _director->runWithScene(scene);
+    _director->pushScene(_gameBeginning);
 }
 
-void GameManager::stopGame()
+void GameManager::startGame()
 {
-    _director->stopAnimation();
+    _gameRunning = GameRunning::create();
 
+    _director->pushScene(_gameRunning);
+}
+
+void GameManager::resizeScene(Scene* scene)
+{
+    auto gameCenter = this->getGameCenter();
+    auto scale = this->getScreenScale();
+    scene->setScale(this->getScreenScale());
 }
 
 float GameManager::getRandomNumber(float maxNumber, float minNumber)
@@ -42,13 +51,20 @@ bool GameManager::init()
 
     srand(time(0));
 
-    // TODO: no magic number
-    _gamePlaceSize = Size(400, 400); 
 
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Point origin = Director::getInstance()->getVisibleOrigin();
 
     _gameCenter = Point(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y);
+
+    // TODO: no magic number
+    _gamePlaceSize = Size(400, 400);
+
+    float scaleY = visibleSize.height / _gamePlaceSize.height;
+    float scaleX = visibleSize.width / _gamePlaceSize.width;
+
+    _screenScale = scaleY > scaleX ? scaleY : scaleX;
+    _gamePlaceSize = visibleSize / _screenScale;
      
     return true;
 }  
@@ -61,4 +77,9 @@ Size GameManager::getGamePlaceSize() const
 Point GameManager::getGameCenter() const
 {
     return _gameCenter;
+}
+
+float GameManager::getScreenScale() const
+{
+    return _screenScale;
 }

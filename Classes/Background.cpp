@@ -7,6 +7,11 @@ string Background::picturePath = "Background.png";
 
 bool Background::init()
 {
+    if (!Layer::init())
+    {
+        return false;
+    }
+
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	Point origin = Director::getInstance()->getVisibleOrigin();
 

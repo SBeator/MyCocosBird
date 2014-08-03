@@ -13,10 +13,12 @@ public:
 
     bool hitBird(Bird* bird);
 
+    void stop();
 private:
 
     virtual void update(float delta);
     float _velocity;
+    bool _pause;
 
     cocos2d::Sprite* _upBlocker;
     cocos2d::Sprite* _downBlocker;

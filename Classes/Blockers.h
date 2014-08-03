@@ -15,10 +15,13 @@ public:
 
     bool hitBird(Bird* bird);
 
+    void stop();
+
 private:
     virtual void update(float delta);
     void removeBlockerIfOut();
 
+    bool _pause;
 
     cocos2d::Vector<Blocker*> _blockers;
     float _blockerCreateTime;

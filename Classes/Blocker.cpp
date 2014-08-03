@@ -11,6 +11,11 @@ float Blocker::s_velocity =-3;
 
 bool Blocker::init()
 {
+    if (!Layer::init())
+    {
+        return false;
+    }
+
     _velocity = s_velocity;
 
     _downBlocker = Sprite::create(s_imagePath);
@@ -31,16 +36,26 @@ bool Blocker::init()
 
     this->scheduleUpdate();
 
+    _pause = false;
+
     return true;
+}
+
+void Blocker::stop()
+{
+    _pause = true;
 }
 
 void Blocker::update(float delta)
 {
-    auto position = this->getPosition();
+    if (!_pause)
+    {
+        auto position = this->getPosition();
 
-    position.x += _velocity;
+        position.x += _velocity;
 
-    this->setPosition(position);
+        this->setPosition(position);
+    }
 }
 
 float Blocker::getWidth() const

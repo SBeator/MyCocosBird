@@ -4,13 +4,13 @@
 class Background : public cocos2d::Layer
 {
 public:
-	virtual bool init();
+    virtual bool init();
 
-	CREATE_FUNC(Background);
+    CREATE_FUNC(Background);
 
 private:
 
-	static std::string picturePath;
+    static std::string picturePath;
 
     cocos2d::Sprite* _backgroundPicture;
 };
