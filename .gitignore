@@ -1,8 +1,13 @@
 cocos2d/
-proj.android/
 proj.ios_mac/
 proj.linux/
 proj.win32/
 proj.wp8-xaml/
 .cocos-project.json
 CMakeLists.txt
+
+proj.android/bin
+proj.android/assets
+proj.android/gen
+proj.android/libs
+proj.android/obj

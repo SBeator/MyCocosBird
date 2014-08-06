@@ -24,7 +24,7 @@ bool Blockers::init()
 void Blockers::stop()
 {
     _pause = true;
-    for each (auto blocker in _blockers)
+    for (auto blocker : _blockers)
     {
         blocker->stop();
     }

@@ -39,7 +39,7 @@ void GameLayer::stop()
 
 bool GameLayer::checkIfBirdHitBlockerOrGround()
 {
-    return _blockers->hitBird(_bird) || _bird->hitGround();
+    return _blockers->hitBird(_bird);
 }
 
 bool GameLayer::onTouchBegan(Touch* touch, Event* event)
